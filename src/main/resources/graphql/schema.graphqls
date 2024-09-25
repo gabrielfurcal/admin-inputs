@@ -1,0 +1,150 @@
+type Query {
+    schedules: [Schedule!]!
+    scheduleById(id: Int): Schedule
+    status: [Status!]!
+    statusById(id: Int): Status
+    trains: [Train!]!
+    trainById(id: Int): Train
+    cities: [City!]!
+    cityById(id: Int): City
+    employees: [Employee!]!
+    employeeById(id: Int): Employee
+    stations: [Station!]!
+    stationById(id: Int): Station
+    routes: [Route!]!
+    routeById(id: Int): Route
+}
+
+type Status {
+    id: ID!
+    name: String!
+    description: String!
+    schedules: [Schedule!]!
+}
+
+type Schedule {
+    id: ID!
+    trainId: Int
+    routeId: Int
+    departureTime: String
+    arrivalTime: String
+    status: Status
+}
+
+type Train {
+    id: ID!
+    type: String!
+    capacity: Int!
+    maxSpeed: Float!
+}
+
+type City {
+    id: ID!
+    city: String!
+    province: String!
+    country: String!
+}
+
+type Employee {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    position: String!
+    phoneNumber: String!
+    email: String!
+}
+
+type Station {
+    id: ID!
+    name: String!
+    countryCode: String!
+    phone: String!
+    postalCode: String!
+    latitude: Float
+    longitude: Float
+    cityId: Int!
+    imageUrl: String
+}
+
+type Route {
+    id: ID!
+    startStation: Station
+    endStation: Station
+    distance: Float!
+}
+
+###################################### MUTATIONS ######################################
+
+type Mutation {
+    saveStatus(status: StatusInput): Status
+    deleteStatus(id: Int!): Boolean
+    saveSchedule(schedule: ScheduleInput): Schedule
+    deleteSchedule(id: Int!): Boolean
+    saveTrain(train: TrainInput): Train
+    deleteTrain(id: Int!): Boolean
+    saveCity(city: CityInput): City
+    deleteCity(id: Int!): Boolean
+    saveEmployee(employee: EmployeeInput): Employee
+    deleteEmployee(id: Int!): Boolean
+    saveStation(station: StationInput): Station
+    deleteStation(id: Int!): Boolean
+    saveRoute(route: RouteInput): Route
+    deleteRoute(id: Int!): Boolean
+}
+
+input StatusInput {
+    id: ID
+    name: String!
+    description: String!
+}
+
+input ScheduleInput {
+    id: ID
+    trainId: Int
+    statusId: Int
+    routeId: Int
+    departureTime: String
+    arrivalTime: String
+}
+
+input TrainInput {
+    id: ID
+    type: String
+    capacity: Int
+    maxSpeed: Float
+}
+
+input CityInput {
+    id: ID
+    city: String
+    province: String
+    country: String
+}
+
+input EmployeeInput {
+    id: ID
+    firstName: String
+    lastName: String
+    position: String
+    phoneNumber: String
+    email: String
+}
+
+input StationInput {
+    id: ID
+    name: String
+    countryCode: String
+    phone: String
+    postalCode: String
+    latitude: Float
+    longitude: Float
+    cityId: Int
+    imageUrl: String
+}
+
+input RouteInput {
+    id: ID
+    startStationId: Int
+    endStationId: Int
+    distance: Float
+}

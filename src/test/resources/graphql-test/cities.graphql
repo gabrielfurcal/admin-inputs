@@ -1,0 +1,8 @@
+query cities {
+    cities {
+        id
+        city
+        province
+        country
+    }
+}
